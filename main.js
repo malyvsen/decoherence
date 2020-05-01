@@ -1,5 +1,7 @@
 imagePicker = document.getElementById('select-image');
 originalImage = document.getElementById('original-image');
+originalImage.style.maxWidth = "512px";
+originalImage.style.maxHeight = "512px";
 transformedImage = document.getElementById('transformed-image');
 angle = Math.PI * .25;
 
