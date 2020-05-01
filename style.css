@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+
+html * {
+    font-family: 'Poiret One', cursive;
+    font-size: 6mm;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    font-size: 12mm;
+}
+
+h2 {
+    color: gray;
+}
+
+a {
+    color: yellow;
+}

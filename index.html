@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decoherence</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div id="header">
+        <h1>Decoherence</h1>
+        <h2>Using the Fourier transform of images to do crazy things.</h2>
+    </div>
+    <div id="menu">
+        <input type="file" id="select-image" accept="image/*" onchange="usePickedFile()" style="display: none;">
+        <a href="#" onclick="pickFile()">Select image</a>
+         or 
+        <a href="#" onclick="useDemoImage()">show example</a>
+    </div>
+    <div id="images">
+        <img id="original-image">
+        <img id="transformed-image">
+    </div>
+</body>
+</html>
+
+
+<script src="http://turbomaze.github.io/JS-Fourier-Image-Analysis/js/fourier.js"></script>
+<script src="main.js"></script>
