@@ -9,7 +9,7 @@ function pickFile() {
 
 function usePickedFile() {
     fileReader = new FileReader();
-    fileReader.onload = function(event) {
+    fileReader.onload = function (event) {
         useImage(event.target.result);
     };
     fileReader.readAsDataURL(imagePicker.files[0]);
@@ -20,7 +20,7 @@ function useDemoImage() {
 }
 
 function useImage(src) {
-    originalImage.onload = function() {
+    originalImage.onload = function () {
         let imageData = imageToArray(originalImage);
         let transformedData = transformImage(imageData);
         let canvas = document.createElement('canvas');
@@ -56,7 +56,7 @@ function transformImage(data) {
         b.push(data[idx + 2]);
         a.push(data[idx + 3]);
     }
-    
+
     let newR = transformGrayscale(r);
     let newG = transformGrayscale(g);
     let newB = transformGrayscale(b);
@@ -73,10 +73,11 @@ function transformImage(data) {
 }
 
 function transformGrayscale(data) {
-    let fft = realFft(data); // todo: this can only deal with power-of-two sized images
+    let paddedData = mirrorPad(data, nearestPowerOf2(data.length));
+    let fft = realFft(paddedData);
     let transformedFft = fft.map(transformValue);
     let transformed = inverseRealFft(transformedFft);
-    return transformed;
+    return transformed.slice(0, data.length);
 }
 
 function transformValue(value) {
@@ -96,4 +97,12 @@ function inverseRealFft(data) {
     let result = [];
     Fourier.invert(dataWithNegative, result);
     return result;
+}
+
+function mirrorPad(array, targetLength) {
+    return array.concat(array.slice(array.length - targetLength).reverse());
+}
+
+function nearestPowerOf2(n) {
+    return Math.pow(2, Math.ceil(Math.log(n) / Math.log(2)));
 }
