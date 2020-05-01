@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Decoherence</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="slider.css">
 </head>
 
 
@@ -15,17 +17,19 @@
     </div>
     <div id="menu">
         <input type="file" id="select-image" accept="image/*" onchange="usePickedFile()" style="display: none;">
-        <a href="#" onclick="pickFile()">Select image</a>
-         or 
+        <a href="#" onclick="pickFile()">Select image</a> or
         <a href="#" onclick="useDemoImage()">show example</a>
+        <p>Intensity: <input type="range" id="intensity" value="0.25" min="0" max="0.5" step="0.001" class="range blue" /></p>
     </div>
     <div id="images">
         <img id="original-image">
         <img id="transformed-image">
     </div>
 </body>
+
 </html>
 
 
+<script src="slider.js"></script>
 <script src="fourier.js"></script>
 <script src="main.js"></script>

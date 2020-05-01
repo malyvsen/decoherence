@@ -1,7 +1,7 @@
 imagePicker = document.getElementById('select-image');
 originalImage = document.getElementById('original-image');
 transformedImage = document.getElementById('transformed-image');
-angle = Math.PI * .25; // todo: expose to the user
+angle = Math.PI * .25;
 
 function pickFile() {
     imagePicker.click();
@@ -9,7 +9,7 @@ function pickFile() {
 
 function usePickedFile() {
     fileReader = new FileReader();
-    fileReader.onload = function (event) {
+    fileReader.onload = function(event) {
         useImage(event.target.result);
     };
     fileReader.readAsDataURL(imagePicker.files[0]);
@@ -20,19 +20,21 @@ function useDemoImage() {
 }
 
 function useImage(src) {
-    originalImage.onload = function () {
-        let imageData = imageToArray(originalImage);
-        let transformedData = transformImage(imageData);
-        let canvas = document.createElement('canvas');
-        let ctx = canvas.getContext('2d');
-        canvas.width = originalImage.width;
-        canvas.height = originalImage.height;
-        let idata = ctx.createImageData(originalImage.width, originalImage.height);
-        idata.data.set(transformedData);
-        ctx.putImageData(idata, 0, 0);
-        transformedImage.src = canvas.toDataURL();
-    };
+    originalImage.onload = updateTransformed;
     originalImage.src = src;
+}
+
+function updateTransformed() {
+    let imageData = imageToArray(originalImage);
+    let transformedData = transformImage(imageData);
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    canvas.width = originalImage.width;
+    canvas.height = originalImage.height;
+    let idata = ctx.createImageData(originalImage.width, originalImage.height);
+    idata.data.set(transformedData);
+    ctx.putImageData(idata, 0, 0);
+    transformedImage.src = canvas.toDataURL();
 }
 
 function imageToArray(image) {
